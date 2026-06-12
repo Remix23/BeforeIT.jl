@@ -2,7 +2,7 @@ import BeforeIT_Modded as Bit
 
 using Random, Plots, Dates
 
-cal = Bit.download_zenodo_calibration_object("AT")
+cal = Bit.download_zenodo_calibration_object("HU")
 
 parameters, initial_conditions = Bit.get_params_and_initial_conditions(cal, DateTime(2010, 03, 31); scale = 0.001)
 

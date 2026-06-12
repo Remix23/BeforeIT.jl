@@ -39,6 +39,11 @@ Bit.@object mutable struct Properties(Object) <: AbstractProperties
     sb_other::Bit.typeFloat
     E_k::Bit.typeFloat
     r_bar::Bit.typeFloat
+
+    # custom parameters
+    omega::Bit.typeFloat
+    lampda_p::Bit.typeFloat
+    pi_bar::Bit.typeFloat
 end
 
 function Properties(parameters::Dict{String, Any}, initial_conditions)
@@ -93,9 +98,14 @@ function Properties(parameters::Dict{String, Any}, initial_conditions)
     E_k = typeFloat(initial_conditions["E_k"])
     r_bar = typeFloat(initial_conditions["r_bar"])
 
+    ### custom parameters:
+    omega = typeFloat(get(parameters, "omega", 0.5))
+    lampda_p = typeFloat(get(parameters, "lampda_p", 2))
+    pi_bar = typeFloat(get(parameters, "pi_bar", 1))
+
     return Properties(
         G, T_prime, H_act, H_inact, J, L, I_s, I, H, tau_INC, tau_FIRM, tau_VAT, tau_SIF,
         tau_SIW, tau_EXPORT, tau_CF, tau_G, theta_UB, psi, psi_H, mu, theta_DIV, theta, zeta, zeta_LTV,
-        zeta_b, b_CF_g, b_CFH_g, b_HH_g, c_G_g, c_E_g, c_I_g, a_sg, C, D_H, K_H, sb_other, E_k, r_bar
+        zeta_b, b_CF_g, b_CFH_g, b_HH_g, c_G_g, c_E_g, c_I_g, a_sg, C, D_H, K_H, sb_other, E_k, r_bar, omega, lampda_p, pi_bar
     )
 end

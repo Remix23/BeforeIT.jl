@@ -42,8 +42,14 @@ function download_zenodo_calibration_object(country)
         error("Country $(country) is not in the list of available countries. See AVAILABLE_COUNTRIES.")
     end
     url = ZENODO_REPOSITORY_URL * country * "_calibration_object.jld2"
-    tmp_path = tempname() * ".jld2"
-    Downloads.download(url, tmp_path)
-    co = load(tmp_path)["calibration_object"]
+    dir = joinpath(splitpath(dirname(pathof(@__MODULE__)))[1:(end - 1)])
+    file_path = joinpath(dir, "data/" * country * "/calibration_object.jld2")
+    if isfile(file_path)
+        # @info "Calibration object for $country already exists at $file_path. Loading from there."
+        return load(file_path)["calibration_object"]
+    end
+    mkdir(joinpath(dir, "data/" * country))
+    Downloads.download(url, file_path)
+    co = load(file_path)["calibration_object"]
     return co
 end
