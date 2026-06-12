@@ -1,7 +1,7 @@
 # # Essential use of BeforeIT
 
 # We start by importing the BeforeIT library and other useful libraries.
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots, StatsPlots
 
 # We then initialise the model loading some precomputed set of parameters and by specifying a number of epochs.

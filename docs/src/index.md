@@ -1,5 +1,5 @@
 ```@meta
-CurrentModule = BeforeIT 
+CurrentModule = BeforeIT
 ```
 
 # Behavioural agent-based economic forecasting in Julia
@@ -29,7 +29,7 @@ Pkg.add("BeforeIT")
 To check that the installation worked, try running the model in your terminal with
 
 ```julia
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 parameters = Bit.AUSTRIA2010Q1.parameters
 initial_conditions = Bit.AUSTRIA2010Q1.initial_conditions

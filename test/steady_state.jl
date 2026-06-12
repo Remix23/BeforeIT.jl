@@ -1,4 +1,4 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 parameters = Bit.STEADY_STATE2010Q1.parameters
 initial_conditions = Bit.STEADY_STATE2010Q1.initial_conditions

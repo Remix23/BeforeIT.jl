@@ -4,7 +4,7 @@
 #
 # Supports base model and extension variants (e.g., CANVAS, GrowthRateAR1).
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Dates
 
 # =============================================================================

@@ -3,7 +3,7 @@
 # In this tutorial we illustrate how to make use of multi-threading in `BeforeIT.jl`
 # to allow for faster executions of single simulation runs.
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots, StatsPlots
 
 # First, we initialise the model, this time we use the Italy 2010Q1 scenario

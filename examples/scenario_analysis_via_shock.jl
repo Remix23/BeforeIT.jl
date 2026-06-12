@@ -4,7 +4,7 @@
 # running the model multiple times under a specific shock and comparing the
 # results with the unshocked model.
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 import StatsBase: mean, std
 using Plots
 

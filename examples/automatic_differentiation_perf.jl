@@ -11,7 +11,7 @@ const FloatType = Float128
 using Preferences
 
 set_preferences!("BeforeIT", "typeFloat" => "$FloatType"; force = true)
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 function gdp(m)
     tot_C_h = sum(m.w_act.C_h) + sum(m.w_inact.C_h) + sum(m.firms.C_h) + m.bank.C_h

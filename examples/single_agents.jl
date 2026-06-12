@@ -8,7 +8,7 @@
 # In practice, this allows to operate on agents as if they were single
 # structs. Let's see how this unfolds with a concrete example. As usual,
 # we create a model instance with
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 parameters = Bit.AUSTRIA2010Q1.parameters
 initial_conditions = Bit.AUSTRIA2010Q1.initial_conditions

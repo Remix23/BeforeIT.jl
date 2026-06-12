@@ -1,6 +1,6 @@
 # # Full multiple-prediction pipeline
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots, StatsPlots
 
 # Decide the name of a folder where to store all data

@@ -12,7 +12,7 @@ This script implements changes 3 and 4 by overwriting the methods that govern th
 To introduce changes 1 and 2 we need dissagregated data at the household and firm level.
 """
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots, Dates, StatsPlots
 
 # get parameters and initial conditions

@@ -2,7 +2,7 @@
 
 # # Extension by Specialization
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots
 
 # When extending the BeforeIT model it is required to first create a new model

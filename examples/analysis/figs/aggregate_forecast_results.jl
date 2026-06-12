@@ -2,7 +2,7 @@
 # Creates heatmaps for visual comparison of forecast performance across countries
 
 using DataFrames, Statistics, Plots
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 # =============================================================================
 # MODEL VARIANT CONFIGURATION

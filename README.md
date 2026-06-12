@@ -1,4 +1,3 @@
-
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://bancaditalia.github.io/BeforeIT.jl/stable/)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://bancaditalia.github.io/BeforeIT.jl/dev/)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
@@ -18,7 +17,7 @@
 Welcome to BeforeIT.jl, a package for **B**ehavioural agent-based **e**conomic **fore**casting,
 from the **IT** research unit of the Bank of Italy.
 
-BeforeIT.jl is a Julia-based framework based on the agent-based model presented in 
+BeforeIT.jl is a Julia-based framework based on the agent-based model presented in
 [_Economic forecasting with an agent-based model_](https://www.sciencedirect.com/science/article/pii/S0014292122001891),
 the first ABM matching the forecasting performance of traditional economic tools.
 
@@ -30,7 +29,7 @@ Developed in Julia, a language known for its efficiency, BeforeIT.jl is both fas
 making it accessible whether you're an expert programmer or just starting out.
 
 The package currently contains the original parametrisation for Austria, as well as a parametrisation for Italy.
-Recalibrating the model on other nations is possible of course. 
+Recalibrating the model on other nations is possible of course.
 For instance, the [CalibrateBeforeIT.jl](https://github.com/ViennaInstitute/CalibrateBeforeIT.jl) package can be used to initialise the model for all 27 EU member states.
 This is still work in progress, so get in touch if you are interested!
 
@@ -64,7 +63,7 @@ Pkg.instantiate()
 Now you should be able to run the the following code
 
 ```julia
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 parameters = Bit.AUSTRIA2010Q1.parameters
 initial_conditions = Bit.AUSTRIA2010Q1.initial_conditions
@@ -96,7 +95,6 @@ say `main.jl`, and run it directly from the terminal by typing
 julia --project=. main.jl
 ```
 
-
 ## Docs
 
 Extensive documentation on how to use the package is available [here](https://bancaditalia.github.io/BeforeIT.jl/dev/).
@@ -107,28 +105,31 @@ Furthermore, we suggest reading the software description available [here](https:
 ## Download Source Code and Run Tests
 
 ### Clone the Repository
+
 ```bash
 git clone https://github.com/bancaditalia/BeforeIT.jl.git
 cd BeforeIT.jl
 ```
 
 ### Activate and Instantiate the Environment
+
 ```bash
 julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate();'
 ```
 
 ### Run Tests
+
 ```bash
 julia --proj test/runtests.jl
 ```
 
 ### Format the Package
+
 ```bash
 julia --proj format.jl
 ```
 
 ## Current Authors
-
 
 <table>
   <tr>

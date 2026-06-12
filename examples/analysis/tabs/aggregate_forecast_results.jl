@@ -2,7 +2,7 @@
 # Aggregates per-country forecast results into cross-country summaries
 
 using CSV, DataFrames, Statistics, Printf
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 # =============================================================================
 # MODEL VARIANT CONFIGURATION

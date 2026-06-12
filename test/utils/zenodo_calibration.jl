@@ -1,7 +1,7 @@
 # Test for zenodo calibration data functionality
 # Tests the integration between download_zenodo_calibration_object and get_params_and_initial_conditions
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Dates, Test
 
 @testset "Zenodo calibration integration" begin

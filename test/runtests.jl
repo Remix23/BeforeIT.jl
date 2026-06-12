@@ -1,9 +1,9 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 using Test
 using Runic
 
-@testset "BeforeIT.jl Tests" begin
+@testset "BeforeIT_Modded.jl Tests" begin
 
     #utils
     include("utils/positive.jl")
@@ -43,7 +43,7 @@ using Runic
         isformat = Bit.format_package(check = true)
         @test isformat == true
         if isformat == false
-            @warn "Formatting failed: use `import BeforeIT as Bit; using Runic; Bit.format_package()` to run the formatter"
+            @warn "Formatting failed: use `import BeforeIT_Modded as Bit; using Runic; Bit.format_package()` to run the formatter"
         end
     end
 

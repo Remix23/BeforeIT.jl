@@ -1,6 +1,6 @@
 # # Full prediction pipeline
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Dates, Plots, StatsPlots
 
 # We start from loading the calibration object for italy, which contains

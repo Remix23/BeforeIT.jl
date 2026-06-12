@@ -1,4 +1,4 @@
-module BeforeIT
+module BeforeIT_Modded
 
 import Base: length
 
@@ -13,7 +13,7 @@ using Random
 using StatsBase
 using WeightVectors
 
-const Bit = BeforeIT
+const Bit = BeforeIT_Modded
 
 const typeFloat = eval(Meta.parse(@load_preference("typeFloat", default = "Float64")))
 const typeInt = eval(Meta.parse(@load_preference("typeInt", default = "Int")))

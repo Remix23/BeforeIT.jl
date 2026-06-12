@@ -3,7 +3,7 @@
 # In this tutorial we will illustrate how to experiment with
 # different expectations of the agents in the model.
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Random, Plots
 
 # Import standard parameters and initial conditions

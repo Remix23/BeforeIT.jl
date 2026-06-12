@@ -1,4 +1,4 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using JLD2, Dates
 
 reference_file = joinpath(@__DIR__, "2010Q1.jld2")

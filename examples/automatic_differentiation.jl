@@ -54,7 +54,7 @@ if WORKER_ARG_INDEX !== nothing
     end
 
     set_preferences!("BeforeIT", "typeFloat" => FLOAT_TYPE_NAME; force = true)
-    import BeforeIT as Bit
+    import BeforeIT_Modded as Bit
 
     const FloatType = Bit.typeFloat
 

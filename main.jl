@@ -1,18 +1,13 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
-using Random, Plots
+using Random, Plots, Dates
 
-parameters = Bit.AUSTRIA2010Q1.parameters
-initial_conditions = Bit.AUSTRIA2010Q1.initial_conditions
+cal = Bit.download_zenodo_calibration_object("AT")
+
+parameters, initial_conditions = Bit.get_params_and_initial_conditions(cal, DateTime(2010, 03, 31); scale = 0.001)
 
 model = Bit.Model(parameters, initial_conditions)
-
-T = 20
-for t in 1:T
-    println("Step: ", t)
-    Bit.step!(model; parallel = true)
-    Bit.collect_data!(model)
-end
+model = Bit.run!(model, 40)
 
 data = model.data
 
@@ -26,4 +21,5 @@ p7 = plot(data.wages, title = "wages", titlefont = 10)
 p8 = plot(data.euribor, title = "euribor", titlefont = 10)
 p9 = plot(data.nominal_gdp ./ data.real_gdp, title = "gdp deflator", titlefont = 10)
 
-plot(p1, p2, p3, p4, p5, p6, p7, p8, p9, layout = (3, 3), legend = false)
+display(plot(p1, p2, p3, p4, p5, p6, p7, p8, p9, layout = (3, 3), legend = false))
+readline()

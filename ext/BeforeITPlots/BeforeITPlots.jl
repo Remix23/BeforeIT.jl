@@ -1,6 +1,6 @@
 module BeforeITPlots
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots, StatsPlots, Dates
 
 # Constants for default plotting behavior

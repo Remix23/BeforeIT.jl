@@ -1,4 +1,4 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 using JLD2, Test
 

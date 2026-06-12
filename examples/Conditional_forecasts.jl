@@ -1,6 +1,6 @@
 # Forecasts conditional on the REALISED path of Government expenditure, Exports and Imports
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Plots
 
 Bit.@object struct NewModel(Bit.Model) <: Bit.AbstractModel end

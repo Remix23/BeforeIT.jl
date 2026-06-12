@@ -20,7 +20,7 @@ for i in $(seq 1 6); do
 
     pinthreads(:cores)
 
-    import BeforeIT as Bit
+    import BeforeIT_Modded as Bit
 
     function run_model(parameters, initial_conditions, T)
         model = Bit.Model(parameters, initial_conditions)

@@ -1,4 +1,4 @@
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Test, JLD2, StatsBase
 
 @testset "hpfilter" begin

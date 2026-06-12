@@ -5,7 +5,7 @@
 # Set `model_constructor` below; the variant name is derived from it.
 
 using Dates, Statistics, JLD2, FileIO
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 # =============================================================================
 # CONFIGURATION

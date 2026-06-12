@@ -1,6 +1,6 @@
 module BeforeITMooncake
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 import Mooncake
 
 Mooncake.@zero_derivative Mooncake.MinimalCtx Tuple{typeof(Bit.create_weighted_sampler), Any, Any, Any}

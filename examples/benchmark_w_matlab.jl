@@ -8,7 +8,7 @@ using Preferences
 
 set_preferences!("BeforeIT", "typeInt" => "Int32", "typeFloat" => "Float32")
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 using CairoMakie, Statistics, ThreadPinning
 

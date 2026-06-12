@@ -218,7 +218,7 @@ function get_params_and_initial_conditions(
     interest_government_debt_quarterly = if has_quarterly_govt_interest
         calibration_data["interest_government_debt_quarterly"][T_calibration_quarterly]
     else
-        @warn "Using annual 'interest_government_debt' - will apply timescale conversion"
+        # @warn "Using annual 'interest_government_debt' - will apply timescale conversion"
         calibration_data["interest_government_debt"][T_calibration]
     end
 
@@ -236,7 +236,7 @@ function get_params_and_initial_conditions(
         calibration_data["wages_by_sector"][:, T_calibration]  # Sectoral wages (D11)
     else
         # Fallback: estimate sectoral wages from aggregate wages proportional to compensation
-        @warn "wages_by_sector not available, estimating from aggregate wages"
+        # @warn "wages_by_sector not available, estimating from aggregate wages"
         wages_scalar = calibration_data["wages"][T_calibration]
         wages_scalar .* (compensation_employees ./ sum(compensation_employees))
     end
@@ -264,7 +264,7 @@ function get_params_and_initial_conditions(
     government_deficit_quarterly = if has_quarterly_govt_deficit
         calibration_data["government_deficit_quarterly"][T_calibration_quarterly]
     else
-        @warn "Using annual 'government_deficit' - will NOT apply timescale conversion"
+        # @warn "Using annual 'government_deficit' - will NOT apply timescale conversion"
         nothing  # Will use annual directly
     end
     government_deficit_annual = calibration_data["government_deficit"][T_calibration]

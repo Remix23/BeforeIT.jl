@@ -6,7 +6,7 @@
 # then compares their business-cycle statistics — cross-correlations with real
 # GDP and autocorrelations — against the real data.
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 using Dates, Plots, JLD2, FileIO
 
 # =============================================================================

@@ -1,6 +1,6 @@
 module BeforeITFormat
 
-import BeforeIT as Bit
+import BeforeIT_Modded as Bit
 
 using Runic
 
