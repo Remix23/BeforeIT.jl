@@ -300,7 +300,8 @@ looking under `data/<country_code>/` (relative to the working directory) for
 function load_calibration_data(country_code)
     @info "Loading calibration data for $country_code from migrated data"
 
-    country_dir = "data/$(uppercase(country_code))"
+    dir = joinpath(splitpath(dirname(pathof(@__MODULE__)))[1:(end - 1)])
+    country_dir = joinpath(dir, "data/" * country_code)
     if !isdir(country_dir)
         error("No migrated data found for $country_code at $country_dir")
     end
