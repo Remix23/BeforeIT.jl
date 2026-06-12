@@ -13,6 +13,8 @@ Calculate the demand for exports and supply of imports of the rest of the world.
 function rotw_import_export(model)
     rotw = model.rotw
 
+    pi_bar = model.prop.pi_bar
+
     # unpack
     c_E_g, c_I_g, P_bar_g, pi_e = model.prop.c_E_g, model.prop.c_I_g, model.agg.P_bar_g, model.agg.pi_e
     epsilon_E, epsilon_I = model.agg.epsilon_E, model.agg.epsilon_I
@@ -26,6 +28,7 @@ function rotw_import_export(model)
     Y_I = exp(rotw.alpha_I * log(rotw.Y_I) + rotw.beta_I .+ epsilon_I)
     Y_m = c_I_g * Y_I
     P_m = P_bar_g * (1 + pi_e)
+    ### the weighting of imports / exports
 
     return C_E, Y_I, C_d_l, Y_m, P_m
 end

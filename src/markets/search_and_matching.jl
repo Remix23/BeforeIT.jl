@@ -12,6 +12,9 @@ function search_and_matching!(model::AbstractModel; parallel = false)
     w_act, w_inact, firms, gov = model.w_act, model.w_inact, model.firms, model.gov
     bank, rotw, agg, prop = model.bank, model.rotw, model.agg, model.prop
 
+    ### custom parameters
+    omega, lambda_p = model.prop.omega, model.prop.lambda_p
+
     # Initialize variables for firms market
     a_sg, b_CF_g, P_f, S_f, S_f_, G_f, I_i_g, DM_i_g, P_bar_i_g,
         P_CF_i_g = initialize_variables_firms_market(firms, rotw, prop)
@@ -35,7 +38,7 @@ function search_and_matching!(model::AbstractModel; parallel = false)
 
         perform_firms_market!(
             g, firms, a_sg, b_CF_g, P_f, S_f, S_f_, I_i_g, DM_i_g,
-            P_bar_i_g, P_CF_i_g, F_g, S_fg, S_fg_, G_f
+            P_bar_i_g, P_CF_i_g, F_g, S_fg, S_fg_, G_f, omega, lambda_p
         )
 
         return perform_retail_market!(
@@ -43,7 +46,7 @@ function search_and_matching!(model::AbstractModel; parallel = false)
             b_HH_g, b_CFH_g, c_E_g, c_G_g, Q_d_i_g, Q_d_m_g,
             C_h, I_h, C_j_g, C_l_g, P_bar_h_g, P_bar_CF_h_g,
             P_j_g, P_l_g, S_fg, S_fg_, F_g, P_f, S_f, G_f,
-            RETAIL_LOCK, parallel
+            RETAIL_LOCK, parallel, omega, lambda_p
         )
     end
 
@@ -198,7 +201,7 @@ Perform the firms market exchange process
 """
 function perform_firms_market!(
         g, firms, a_sg, b_CF_g, P_f, S_f, S_f_, I_i_g, DM_i_g, P_bar_i_g, P_CF_i_g,
-        F_g, S_fg, S_fg_, G_f,
+        F_g, S_fg, S_fg_, G_f, omega, lambda_p
     )
     ##############################
     ######## FIRMS MARKET ########
@@ -216,7 +219,7 @@ function perform_firms_market!(
     # continue exchanges until either demand or supply terminates
 
     # weights according to size and price
-    F_g_active = create_weighted_sampler(P_f, S_f, F_g)
+    F_g_active = create_weighted_sampler(P_f, S_f, F_g, omega, lambda_p)
 
     while !isempty(I_g) && !iszero(F_g_active)
 
@@ -249,7 +252,7 @@ function perform_firms_market!(
         ufilter!(i -> S_fg_[i] > 0.0 && S_f[i] > 0.0, F_g_)
 
         # weights according to size and price
-        F_g_active = create_weighted_sampler(P_f, S_f, F_g_)
+        F_g_active = create_weighted_sampler(P_f, S_f, F_g_, omega, lambda_p)
 
         while !isempty(I_g) && !iszero(F_g_active)
 
@@ -294,7 +297,7 @@ function perform_retail_market!(
         g, agg, gov, rotw, I, H, L, J, C_d_h, I_d_h, b_HH_g, b_CFH_g,
         c_E_g, c_G_g, Q_d_i_g, Q_d_m_g, C_h, I_h, C_j_g, C_l_g, P_bar_h_g,
         P_bar_CF_h_g, P_j_g, P_l_g, S_fg, S_fg_, F_g, P_f, S_f, G_f,
-        RETAIL_LOCK, parallel
+        RETAIL_LOCK, parallel, omega, lambda_p
     )
     ###############################
     ######## RETAIL MARKET ########
@@ -311,7 +314,7 @@ function perform_retail_market!(
     ufilter!(i -> S_fg[i] > 0.0, F_g)
 
     # weights according to size and price
-    F_g_active = create_weighted_sampler(P_f, S_f, F_g)
+    F_g_active = create_weighted_sampler(P_f, S_f, F_g, omega, lambda_p)
 
     while !isempty(H_g) && !iszero(F_g_active)
 
@@ -341,7 +344,7 @@ function perform_retail_market!(
         ufilter!(i -> S_fg_[i] > 0.0 && S_f[i] > 0.0, F_g_)
 
         # weights according to size and price
-        F_g_active = create_weighted_sampler(P_f, S_f, F_g_)
+        F_g_active = create_weighted_sampler(P_f, S_f, F_g_, omega, lambda_p)
 
         while !isempty(H_g) && !iszero(F_g_active)
 
@@ -399,9 +402,11 @@ function update_non_sector_vars!(C_h, I_h, b, d, RETAIL_LOCK, ::Val{false})
     return @~ I_h .+= d
 end
 
-function compute_price_size_weights(P_f, S_f, F_g)
+function compute_price_size_weights(P_f, S_f, F_g, omega, lambda_p)
+    neg_lambda_p = -lambda_p
+    omega_size = 1.0 - omega
     # price probability of being selected
-    pr_price_f_v = @~ exp.(-2 .* @view(P_f[F_g]))
+    pr_price_f_v = @~ exp.(neg_lambda_p .* @view(P_f[F_g]))
     pr_price_f_sum = sum(pr_price_f_v)
     pr_price_f = @~ pos.(pr_price_f_v ./ pr_price_f_sum)
     # size probability of being selected
@@ -409,12 +414,12 @@ function compute_price_size_weights(P_f, S_f, F_g)
     pr_size_f_sum = sum(pr_size_f_v)
     pr_size_f = @~ pr_size_f_v ./ pr_size_f_sum
     # total weight of being selected
-    w_cum_f_ = @~ pr_price_f .+ pr_size_f
+    w_cum_f_ = @~ omega .* pr_price_f .+ omega_size .* pr_size_f
     return w_cum_f_
 end
 
-function create_weighted_sampler(P_f, S_f, F_g)
+function create_weighted_sampler(P_f, S_f, F_g, omega, lambda_p)
     isempty(F_g) && return WeightVectors.FixedSizeWeightVector(0)
-    w_cum_f_ = compute_price_size_weights(P_f, S_f, F_g)
+    w_cum_f_ = compute_price_size_weights(P_f, S_f, F_g, omega, lambda_p)
     return WeightVectors.FixedSizeWeightVector(w_cum_f_)
 end
