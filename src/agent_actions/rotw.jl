@@ -27,7 +27,7 @@ function rotw_import_export(model)
     # compute supply of imports
     Y_I = exp(rotw.alpha_I * log(rotw.Y_I) + rotw.beta_I .+ epsilon_I)
     Y_m = c_I_g * Y_I
-    P_m = P_bar_g * (1 + pi_e)
+    P_m = P_bar_g * (1 + pi_e) * pi_bar
     ### the weighting of imports / exports
 
     return C_E, Y_I, C_d_l, Y_m, P_m
