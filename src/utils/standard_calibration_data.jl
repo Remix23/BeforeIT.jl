@@ -32,6 +32,11 @@ using Downloads
 const ZENODO_REPOSITORY_URL = "https://zenodo.org/records/18698434/files/"
 const AVAILABLE_COUNTRIES = ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
 
+
+function recontruct_calibration_object(calibration_data, figaro, data, ea, max_calibration_date, estimation_date)
+    return CalibrationData(calibration_data, figaro, data, ea, max_calibration_date, estimation_date)
+end
+
 """
     download_zenodo_calibration_object(country)
 
@@ -46,10 +51,16 @@ function download_zenodo_calibration_object(country)
     file_path = joinpath(dir, "data/" * country * "/calibration_object.jld2")
     if isfile(file_path)
         # @info "Calibration object for $country already exists at $file_path. Loading from there."
-        return load(file_path)["calibration_object"]
+        co = load(file_path)["calibration_object"]
+        return recontruct_calibration_object(
+            co.calibration, co.figaro, co.data, co.ea, co.max_calibration_date, co.estimation_date
+        )
     end
     mkdir(joinpath(dir, "data/" * country))
     Downloads.download(url, file_path)
     co = load(file_path)["calibration_object"]
-    return co
+    return recontruct_calibration_object(
+        co.calibration, co.figaro, co.data, co.ea, co.max_calibration_date, co.estimation_date
+    )
 end
+

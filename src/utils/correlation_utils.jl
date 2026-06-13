@@ -311,7 +311,10 @@ function load_calibration_data(country_code)
     calibration_data_file = joinpath(country_dir, "calibration_data.jld2")
 
     if isfile(calibration_object_file)
-        return load(calibration_object_file)["calibration_object"]
+        co = load(calibration_object_file)["calibration_object"]
+        return recontruct_calibration_object(
+            co.calibration, co.figaro, co.data, co.ea, co.max_calibration_date, co.estimation_date
+        )
     elseif isfile(calibration_data_file)
         return load(calibration_data_file)["calibration_data"]
     else
